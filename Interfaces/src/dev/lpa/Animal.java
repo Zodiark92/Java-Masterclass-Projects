@@ -1,8 +1,20 @@
 package dev.lpa;
 
-interface FlightEnabled {}
+interface FlightEnabled {
 
-interface Trackable{}
+    void takeOff();
+
+    void land();
+
+    void fly();
+
+}
+
+interface Trackable{
+
+    void track();
+
+}
 
 public abstract class Animal {
 

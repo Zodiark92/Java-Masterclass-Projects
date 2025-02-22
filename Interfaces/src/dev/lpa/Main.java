@@ -1,7 +1,5 @@
 package dev.lpa;
 
-import javax.sound.midi.Track;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -14,6 +12,12 @@ public class Main {
         animal.move();
 //        flier.move(); The type you use (the variable you declared, determines which methods you can call)
 //        tracked.move();
+
+        //bird runtime object
+        flier.takeOff();
+        flier.fly();
+        flier.land();
+        tracked.track();
 
     }
 }
