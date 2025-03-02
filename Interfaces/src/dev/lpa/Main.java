@@ -50,6 +50,8 @@ public class Main {
         flyFliers(betterFlier);
         landFliers(betterFlier);
 
+
+
     }
 
     private static void inFlight(FlightEnabled flier) {

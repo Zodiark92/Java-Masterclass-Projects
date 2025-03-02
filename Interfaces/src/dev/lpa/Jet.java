@@ -21,4 +21,12 @@ public class Jet implements FlightEnabled, Trackable {
     public void track() {
         System.out.println(this.getClass().getSimpleName() + "'s coordinates recorded");
     }
+
+    @Override
+    public FlightStages transition(FlightStages stage) {
+        //override the method
+        System.out.println(getClass().getSimpleName() + " is transitioning");
+//            return FlightStages.CRUISE;
+        return FlightEnabled.super.transition(stage);
+    }
 }
