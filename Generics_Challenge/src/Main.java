@@ -17,14 +17,15 @@ public class Main {
         River colorado = new River("Colorado", new double[]{40.4708, 36.1015, 34.2964}, new double[]{-105.8286, -112.0892, -114.1148});
         colorado.setDescription("The Colorado River is a major river in the U.S. state of Colorado, and the second longest river in the United States, after the Mississippi River.");
 
-        Layer<Park> mapParkLayer = new Layer();
+        Layer<Park> mapParkLayer = new Layer<>();
         mapParkLayer.addElement(yellowstone);
         mapParkLayer.addElement(grandCanyon);
         mapParkLayer.addElement(yosemite);
 
-        Layer<River> mapRiverLayer = new Layer();
+        Layer<River> mapRiverLayer = new Layer<>();
         mapRiverLayer.addElement(missisippi);
         mapRiverLayer.addElement(colorado);
+
 
         mapParkLayer.renderLayer();
         mapRiverLayer.renderLayer();
