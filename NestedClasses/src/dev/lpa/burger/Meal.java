@@ -1,5 +1,6 @@
 package dev.lpa.burger;
 
+import javax.naming.InvalidNameException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,13 +21,13 @@ public class Meal {
 
     public Meal (double conversionRate) {
         this.conversionRate = conversionRate;
-        burger = new Burger("regular");
+        burger = new Burger("regular", 8.0);
         drink = new Item("coke", "drink", 1.5);
         System.out.println(drink.name);
         side = new Item("fries", "side", 2.0);
     }
 
-    public void addToppings(String... toppings) {
+    public void addToppings(String... toppings) throws InvalidNameException {
         burger.addTopping(toppings);
         System.out.println("Toppings added: \n" + Arrays.toString(toppings));
     }
@@ -84,25 +85,29 @@ public class Meal {
 
         private List<Item> toppings = new ArrayList<>();
 
-        public Burger (String name) {
-            super(name, "burger");
+        public Burger (String name, double price) {
+            super(name, "burger", price);
         }
 
-        private void addTopping(String... toppingsToAdd) {
+        private void addTopping(String... toppingsToAdd) throws InvalidNameException {
             for(String topping : toppingsToAdd) {
                 Topping tp = Topping.getToppingName(topping);
-                toppings.add(new Item(topping, "topping", tp != null ? tp.getToppingPrince() : 0.0));
+                if(tp != null) {
+                    toppings.add(new Item(topping, "topping",  tp.getToppingPrince()));
+                } else {
+                    throw new InvalidNameException("Topping not found");
+                }
+
             }
         }
 
         @Override
         public String toString() {
-            StringBuilder toppingsAdded = new StringBuilder("Toppings added: \n");
+            String description = super.toString() + "\n";
             for(var topping : burger.toppings) {
-                toppingsAdded.append(topping.name).append("\n");
-                toppingsAdded.append(topping.price).append("\n");
+               description = description + topping + "\n";
             }
-            return toppingsAdded.toString();
+            return description;
         }
 
         private enum Topping {
@@ -129,7 +134,7 @@ public class Meal {
 
             public static Topping getToppingName (String topping) {
 
-                return switch(topping) {
+                return switch(topping.toUpperCase()) {
                     case "TOMATO" -> TOMATO;
                     case "BACON" -> BACON;
                     case "AVOCADO" -> AVOCADO;
