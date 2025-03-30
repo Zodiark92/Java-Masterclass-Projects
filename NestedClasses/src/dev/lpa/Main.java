@@ -51,4 +51,11 @@ public class Main {
         }
 
     }
+
+    public static void addPigLatinName(List<? extends Employee> list) {
+
+        class DecoratedEmployee extends StoreEmployee {
+
+        }
+    }
 }
