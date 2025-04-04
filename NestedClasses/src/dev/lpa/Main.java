@@ -50,12 +50,49 @@ public class Main {
             System.out.println(emp);
         }
 
+        System.out.println("With pig latin name: ");
+        addPigLatinName(storeEmployees);
+
     }
 
-    public static void addPigLatinName(List<? extends Employee> list) {
+    public static void addPigLatinName(List<? extends StoreEmployee> list) {
 
-        class DecoratedEmployee extends StoreEmployee {
+        String lastName = "Piggy";
 
+        class DecoratedEmployee extends StoreEmployee implements Comparable<DecoratedEmployee> {
+
+            private String pigLatinName;
+            private Employee originalInstance;
+
+            public DecoratedEmployee(String name, Employee originalInstance) {
+                this.pigLatinName = name + " " + lastName;
+                this.originalInstance = originalInstance;
+            }
+
+            @Override
+            public String toString() {
+                return originalInstance.toString() + " " + pigLatinName;
+            }
+
+            @Override
+            public int compareTo(DecoratedEmployee o) {
+                return pigLatinName.compareTo(o.pigLatinName);
+            }
+        }
+
+        List<DecoratedEmployee> newList = new ArrayList<>(list.size());
+        for(var employee : list) {
+            String name = employee.getName();
+            String pigName = name.substring(1) + name.charAt(0) + "ay";
+            newList.add(new DecoratedEmployee(pigName, employee));
+        }
+
+        newList.sort(null); //it will use the comparator created with its compareTo
+
+     //   lastName = "Betty"; // with this change the variable does not be anymore effectively final, and could not be used in the local inner class
+
+        for(var dEmployee : newList) {
+            System.out.println(dEmployee);
         }
     }
 }

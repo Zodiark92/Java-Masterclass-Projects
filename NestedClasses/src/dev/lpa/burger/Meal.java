@@ -103,11 +103,11 @@ public class Meal {
 
         @Override
         public String toString() {
-            String description = super.toString() + "\n";
+            StringBuilder description = new StringBuilder(super.toString() + "\n");
             for(var topping : burger.toppings) {
-               description = description + topping + "\n";
+               description.append(topping).append("\n");
             }
-            return description;
+            return description.toString();
         }
 
         private enum Topping {
